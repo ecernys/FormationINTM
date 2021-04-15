@@ -10,6 +10,14 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
+            int a = 9;
+            if (true)
+            {
+                a = 10; 
+            }
+            
+            //End of program
+            Console.ReadKey();
         }
     }
 }
