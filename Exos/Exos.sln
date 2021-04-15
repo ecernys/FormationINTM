@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exo3", "exo3\exo3.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exo4", "exo4\exo4.csproj", "{20FCF720-D777-4F37-992C-E6317ED80BCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exo5", "exo5\exo5.csproj", "{440CC5BD-524A-45BA-A647-6AECD9A67EFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exo6", "exo6\exo6.csproj", "{58948D2E-3AA9-4CDD-A367-7B969FC6CCDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{20FCF720-D777-4F37-992C-E6317ED80BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20FCF720-D777-4F37-992C-E6317ED80BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20FCF720-D777-4F37-992C-E6317ED80BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{440CC5BD-524A-45BA-A647-6AECD9A67EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440CC5BD-524A-45BA-A647-6AECD9A67EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440CC5BD-524A-45BA-A647-6AECD9A67EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440CC5BD-524A-45BA-A647-6AECD9A67EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58948D2E-3AA9-4CDD-A367-7B969FC6CCDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58948D2E-3AA9-4CDD-A367-7B969FC6CCDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58948D2E-3AA9-4CDD-A367-7B969FC6CCDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58948D2E-3AA9-4CDD-A367-7B969FC6CCDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
