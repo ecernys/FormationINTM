@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace exo4._3
 {
@@ -18,7 +18,7 @@ namespace exo4._3
 
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-            Regex rx = new Regex(@"0[1-9]\d{8}");
+            Regex rx = new Regex(@"\A0[1-9]\d{8}\Z");
             return rx.IsMatch(phoneNumber);
 
         }
@@ -49,7 +49,12 @@ namespace exo4._3
                 }
             }
             else
-                throw new ArgumentException("Name can't be empty");
+            {
+                if (!IsValidPhoneNumber(phoneNumber))
+                    throw new ArgumentException("Phone number is invalid");
+                else
+                    throw new ArgumentException("Name can't be empty");
+            }
         }
 
         public void DeletePhoneNumber(string phoneNumber)
