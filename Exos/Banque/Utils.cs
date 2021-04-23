@@ -12,6 +12,12 @@ namespace Banque
         Dictionary<int, Account> accounts = new Dictionary<int, Account>();
         Dictionary<int, Transaction> transactions = new Dictionary<int, Transaction>();
 
+        /// <summary>
+        /// Method to read Accounts from file
+        /// </summary>
+        /// <param name="acctPath">
+        /// Path of Accounts file 
+        /// </param>
         public void readAccounts(string acctPath)
         {
             using (StreamReader sr = new StreamReader(acctPath))
@@ -34,7 +40,12 @@ namespace Banque
                         {
                             if (sBalance == "")
                                 accounts.Add(id, new Account(id));
-                            else if (double.TryParse(sBalance, out balance))
+                            else if (double.TryParse(
+                                        sBalance, 
+                                        System.Globalization.NumberStyles.AllowDecimalPoint,
+                                        System.Globalization.NumberFormatInfo.InvariantInfo,
+                                        out balance)
+                                    && balance > 0)
                                 accounts.Add(id, new Account(id, balance));
                         }
                     }
@@ -42,6 +53,12 @@ namespace Banque
             }
         }
 
+        /// <summary>
+        /// Method to read Transactions from file 
+        /// </summary>
+        /// <param name="trxnPath">
+        /// Path of Transactions file 
+        /// </param>
         public void readTransactions(string trxnPath)
         {
             using (StreamReader sr = new StreamReader(trxnPath))
@@ -112,6 +129,12 @@ namespace Banque
             }
         }
 
+        /// <summary>
+        /// Method to write Status of Transactions to file
+        /// </summary>
+        /// <param name="sttsTrxnPath">
+        /// Path of output Status of operation file
+        /// </param>
         public void writeTransactionsStatus(string sttsTrxnPath)
         {
             using (StreamWriter sw = new StreamWriter(sttsTrxnPath))
@@ -125,12 +148,17 @@ namespace Banque
             };
         }
 
+        /// <summary>
+        /// Method to execute transaction and return status
+        /// </summary>
         private void TryTransactions()
         {
             foreach (var t in transactions)
             {
-                Console.WriteLine($"     {accounts[1].Balance} " +
-                $"{accounts[2].Balance} {accounts[3].Balance}");
+                Console.WriteLine($"     {accounts[1].Balance.ToString("F")} " +
+                                  $"{accounts[2].Balance.ToString("F")} " +
+                                  $"{accounts[3].Balance.ToString("F")} " +
+                                  $"{accounts[5].Balance.ToString("F")}");
                 if (t.Value.Status == Transaction.TransactionStatus.OK)
                 {
                     if (t.Value.Type == Transaction.TransactionType.Deposition)
@@ -184,8 +212,11 @@ namespace Banque
                             t.Value.Status = Transaction.TransactionStatus.KO;
                     }
                 }
-                Console.WriteLine($"{t.Key} {t.Value.Status} {accounts[1].Balance} " +
-                $"{accounts[2].Balance} {accounts[3].Balance}");
+                Console.WriteLine($"{t.Key} {t.Value.Status} " +
+                    $"{accounts[1].Balance.ToString("F")} " +
+                    $"{accounts[2].Balance.ToString("F")} " +
+                    $"{accounts[3].Balance.ToString("F")} " +
+                    $"{accounts[5].Balance.ToString("F")}");
             }
         }
     }

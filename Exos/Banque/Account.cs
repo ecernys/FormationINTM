@@ -25,6 +25,14 @@ namespace Banque
             this.transactions = new List<Transaction>();
         }
 
+        /// <summary>
+        /// Method to Execute deposit transaction and add Transaction to history
+        /// </summary>
+        /// <param name="amount"> Amount of transaction </param>
+        /// <param name="transaction"> 
+        /// Transaction (all Levy transactions has duplicate Transfer Transaction in transmitter account)
+        /// </param>
+        /// <returns>Bool if succeeded </returns>
         public bool Deposit(double amount, Transaction transaction)
         {
             if (amount > 0)
@@ -35,6 +43,15 @@ namespace Banque
             }
             return false;
         }
+
+        /// <summary>
+        /// Method to Execute withdrawal transaction and add Transaction to history
+        /// </summary>
+        /// <param name="amount"> Amount of transaction </param>
+        /// <param name="transaction">
+        /// Transaction (all Transfer transactions has duplicate Levy Transaction in recipient account) 
+        /// </param>
+        /// <returns>Bool if succeeded</returns>
         public bool Withdraw(double amount, Transaction transaction)
         {
             if (amount > 0)
@@ -49,6 +66,11 @@ namespace Banque
             return false;
         }
 
+        /// <summary>
+        /// Check if last 10 Transactions do not exeed Maximum withdrawal limit
+        /// </summary>
+        /// <param name="amount">Current transaction amount </param>
+        /// <returns>Bool if do not exeeds maxWithdrawal</returns>
         private bool NotExceedMax(double amount)
         {
             if (amount > MaxWithdrawal)
