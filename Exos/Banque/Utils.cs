@@ -41,9 +41,9 @@ namespace Banque
                             if (sBalance == "")
                                 accounts.Add(id, new Account(id));
                             else if (double.TryParse(
-                                        sBalance, 
-                                        System.Globalization.NumberStyles.AllowDecimalPoint,
-                                        System.Globalization.NumberFormatInfo.InvariantInfo,
+                                        sBalance,
+                                        //System.Globalization.NumberStyles.AllowDecimalPoint,
+                                        //System.Globalization.NumberFormatInfo.InvariantInfo,
                                         out balance)
                                     && balance > 0)
                                 accounts.Add(id, new Account(id, balance));
@@ -87,6 +87,7 @@ namespace Banque
                         transaction = new Transaction(
                                 Transaction.TransactionType.Transfer,
                                 Transaction.TransactionStatus.OK,
+                                sId,
                                 "",
                                 id,
                                 amount,
@@ -112,6 +113,7 @@ namespace Banque
                         transaction = new Transaction(
                             Transaction.TransactionType.Transfer,
                             Transaction.TransactionStatus.KO,
+                            sId,
                             rawData,
                             id);
                         transactions.Add(id, transaction);
@@ -122,6 +124,7 @@ namespace Banque
                         transaction = new Transaction(
                             Transaction.TransactionType.Transfer,
                             Transaction.TransactionStatus.KO,
+                            sId,
                             rawData);
                         transactions.Add(--invalidId, transaction);
                     }
@@ -142,8 +145,10 @@ namespace Banque
                 TryTransactions();
                 foreach (var t in transactions)
                 {
-                    sw.WriteLine($"{t.Key};{t.Value.Status}");
-
+                    if (t.Key > 0)
+                        sw.WriteLine($"{t.Key};{t.Value.Status}");
+                    else
+                        sw.WriteLine($"{t.Value.OriginalId};{t.Value.Status}");
                 }
             };
         }
@@ -153,12 +158,15 @@ namespace Banque
         /// </summary>
         private void TryTransactions()
         {
+            Console.WriteLine($"     " +
+                $"{accounts[1].Balance.ToString("F")} " +
+                $"{accounts[2].Balance.ToString("F")} " +
+                $"{accounts[3].Balance.ToString("F")} " +
+                $"{accounts[5].Balance.ToString("F")}");
             foreach (var t in transactions)
             {
-                Console.WriteLine($"     {accounts[1].Balance.ToString("F")} " +
-                                  $"{accounts[2].Balance.ToString("F")} " +
-                                  $"{accounts[3].Balance.ToString("F")} " +
-                                  $"{accounts[5].Balance.ToString("F")}");
+
+
                 if (t.Value.Status == Transaction.TransactionStatus.OK)
                 {
                     if (t.Value.Type == Transaction.TransactionType.Deposition)
@@ -197,6 +205,7 @@ namespace Banque
                                 Transaction transaction = new Transaction(
                                     Transaction.TransactionType.Levy,
                                     Transaction.TransactionStatus.OK,
+                                    t.Value.OriginalId,
                                     "",
                                     t.Value.Id,
                                     t.Value.Amount,
@@ -212,7 +221,14 @@ namespace Banque
                             t.Value.Status = Transaction.TransactionStatus.KO;
                     }
                 }
-                Console.WriteLine($"{t.Key} {t.Value.Status} " +
+                if (t.Key > 0)
+                    Console.WriteLine($"{t.Key} {t.Value.Status} " +
+                        $"{accounts[1].Balance.ToString("F")} " +
+                        $"{accounts[2].Balance.ToString("F")} " +
+                        $"{accounts[3].Balance.ToString("F")} " +
+                        $"{accounts[5].Balance.ToString("F")}");
+                else
+                    Console.WriteLine($"{t.Value.OriginalId} {t.Value.Status} " +
                     $"{accounts[1].Balance.ToString("F")} " +
                     $"{accounts[2].Balance.ToString("F")} " +
                     $"{accounts[3].Balance.ToString("F")} " +

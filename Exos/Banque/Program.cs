@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Banque
     {
         static void Main(string[] args)
         {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
             #region Récupération du chemin des fichiers
 
             string path = Directory.GetCurrentDirectory();

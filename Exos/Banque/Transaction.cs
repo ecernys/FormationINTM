@@ -29,10 +29,12 @@ namespace Banque
         public int Recipient { get; private set; }
         public TransactionStatus Status { get; set; }
         public string InputData { get; set; }
+        public string OriginalId { get; private set; }
 
         public Transaction(
             TransactionType type,
             TransactionStatus status,
+            string originalId,
             string inputData,
             int id = 0,
             double amount = 0,
@@ -41,6 +43,7 @@ namespace Banque
         {
             this.Type = type;
             this.Status = status;
+            this.OriginalId = originalId;
             this.InputData = inputData;
             this.Id = id;
             this.Amount = amount;
