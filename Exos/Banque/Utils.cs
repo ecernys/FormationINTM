@@ -45,7 +45,7 @@ namespace Banque
                                         //System.Globalization.NumberStyles.AllowDecimalPoint,
                                         //System.Globalization.NumberFormatInfo.InvariantInfo,
                                         out balance)
-                                    && balance > 0)
+                                    && balance >= 0)
                                 accounts.Add(id, new Account(id, balance));
                         }
                     }
@@ -158,15 +158,15 @@ namespace Banque
         /// </summary>
         private void TryTransactions()
         {
-            Console.WriteLine($"     " +
-                $"{accounts[1].Balance.ToString("F")} " +
-                $"{accounts[2].Balance.ToString("F")} " +
-                $"{accounts[3].Balance.ToString("F")} " +
-                $"{accounts[5].Balance.ToString("F")}");
+            Console.Write("     ");
+            foreach (var account in accounts)
+            {
+                Console.Write($"{account.Value.Balance.ToString("F")} ");
+            }
+            Console.WriteLine();
+
             foreach (var t in transactions)
             {
-
-
                 if (t.Value.Status == Transaction.TransactionStatus.OK)
                 {
                     if (t.Value.Type == Transaction.TransactionType.Deposition)
@@ -222,17 +222,25 @@ namespace Banque
                     }
                 }
                 if (t.Key > 0)
-                    Console.WriteLine($"{t.Key} {t.Value.Status} " +
-                        $"{accounts[1].Balance.ToString("F")} " +
-                        $"{accounts[2].Balance.ToString("F")} " +
-                        $"{accounts[3].Balance.ToString("F")} " +
-                        $"{accounts[5].Balance.ToString("F")}");
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append($"{t.Key} {t.Value.Status} ");
+                    foreach (var account in accounts)
+                    {
+                        sb.Append($"{account.Value.Balance.ToString("F")} ");
+                    }
+                    Console.WriteLine(sb.ToString());
+                }
                 else
-                    Console.WriteLine($"{t.Value.OriginalId} {t.Value.Status} " +
-                    $"{accounts[1].Balance.ToString("F")} " +
-                    $"{accounts[2].Balance.ToString("F")} " +
-                    $"{accounts[3].Balance.ToString("F")} " +
-                    $"{accounts[5].Balance.ToString("F")}");
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append($"{t.Value.OriginalId} {t.Value.Status} ");
+                    foreach (var account in accounts)
+                    {
+                        sb.Append($"{account.Value.Balance.ToString("F")} ");
+                    }
+                    Console.WriteLine(sb.ToString());
+                }
             }
         }
     }
