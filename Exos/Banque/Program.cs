@@ -18,9 +18,9 @@ namespace Banque
             string path = Directory.GetCurrentDirectory();
             // Fichiers entrée
             //string acctPath = string.Empty;
-            string acctPath = path + @"\Comptes_1.txt";
+            string acctPath = path + @"\Comptes_.txt";
             //string trxnPath = string.Empty;
-            string trxnPath = path + @"\Transactions_1.txt";
+            string trxnPath = path + @"\Transactions_.txt";
             // Fichiers sortie
             string sttsTrxnPath = path + @"\StatutOpe_.txt";
 
